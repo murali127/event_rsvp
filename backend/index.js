@@ -19,3 +19,9 @@ app.use('/api/auth',authRoutes);
 app.listen(3000,()=>{
     console.log('server is running on port 3000');
 });
+
+/*.env MONGO_URL=mongodb+srv://muralijay360:Muralijay360@cluster0.slshk.mongodb.net/user?retryWrites=true&w=majority&appName=Cluster0
+JWT_SECRET=mysecrettoken      "mysecrettoken" : Unknown word.
+##resend.com : re_6wNN9TNc_Hvp5m7uKxin57CxkDo3bqjWo
+RESEND_API_KEY=re_6wNN9TNc_Hvp5m7uKxin57CxkDo3bqjWo
+CLIENT_URL=http://localhost:5173*/
