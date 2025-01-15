@@ -6,7 +6,7 @@ export function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
 
-// Function to perform GET requests
+// Function to perform GET requests with optional authentication
 export async function apiGet(url, options = {}) {
   try {
     const response = await fetch(url, {
@@ -15,20 +15,31 @@ export async function apiGet(url, options = {}) {
         "Content-Type": "application/json",
         ...options.headers,
       },
+      credentials: "include", // Include cookies in the request
+    });
+
+    console.log("Response Details:", {
+      status: response.status,
+      statusText: response.statusText,
+      url: response.url,
     });
 
     if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`Failed to fetch: ${response.statusText}`, errorText);
       throw new Error(`Failed to fetch: ${response.statusText}`);
     }
 
     return await response.json();
   } catch (error) {
-    console.error("Error during GET request:", error);
+    console.error("Error during GET request:", {
+      message: error.message,
+      stack: error.stack,
+    });
     throw error;
   }
 }
 
-// Function to perform DELETE requests
 export async function apiDelete(url, options = {}) {
   try {
     const response = await fetch(url, {
@@ -37,6 +48,7 @@ export async function apiDelete(url, options = {}) {
         "Content-Type": "application/json",
         ...options.headers,
       },
+      credentials: "include", // Include cookies in the request
     });
 
     if (!response.ok) {

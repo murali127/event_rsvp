@@ -9,6 +9,9 @@ import DashboardPage from "./pages/DashboardPage";
 import { Button } from "./components/ui/button";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
+import CreateEventPage from "./pages/CreateEventPage";
+import EventDetailsPage from "./pages/EventDetailsPage";
+import AllEventsPage from "./pages/AllEventsPage";
 
 const ProtectRoute = ({ children }) => {
   const { isAuthenticated, user } = useAuthStore();
@@ -82,7 +85,32 @@ function App() {
             </ProtectRoute>
           }
         />
-      </Routes>
+<Route
+          path="/create"
+          element={
+            <ProtectRoute>
+              <CreateEventPage />
+            </ProtectRoute>
+          }
+        />  
+        <Route
+    path="/events/:id"
+    element={
+      <ProtectRoute>
+        <EventDetailsPage />
+      </ProtectRoute>
+    }
+  />
+  <Route
+    path="/upcoming-events" 
+    element={
+      <ProtectRoute>
+        <AllEventsPage />
+      </ProtectRoute>
+    }
+  />
+        
+            </Routes>
       <Toaster />
     </div>
   );

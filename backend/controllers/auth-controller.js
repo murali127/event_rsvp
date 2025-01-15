@@ -266,3 +266,18 @@ export const getUpcomingEvents  = async (req, res) => {
         res.status(400).json({ success: false, message: error.message });
     }
 };
+//get event details
+export const getEventDetails = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const event = await Event.findById(id); // Assuming `Event` is your model
+      if (!event) {
+        return res.status(404).json({ message: "Event not found" });
+      }
+      res.status(200).json({ event });
+    } catch (error) {
+      console.error("Error fetching event details:", error);
+      res.status(500).json({ message: "Failed to fetch event details" });
+    }
+  };
+  

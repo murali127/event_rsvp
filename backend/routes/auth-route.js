@@ -12,7 +12,8 @@ import {
   deleteEvent,
   rsvpEvent, // Add rsvpEvent
   getParticipantsEvents, // Add getParticipantsEvents
-  getUpcomingEvents // Add getUpcomingEvents
+  getUpcomingEvents,
+  getEventDetails // Add getUpcomingEvents
 } from "../controllers/auth-controller.js";
 import { verifyToken } from "../middleware/verifyToken.js";
 
@@ -28,11 +29,12 @@ router.post("/reset-password/:token", resetpassword);
 router.get("/check-auth", verifyToken, checkAuth);
 
 // Event Routes
-router.post("/events", verifyToken, createEvent);
+router.post("/create", verifyToken, createEvent);
 router.get("/events", verifyToken, getEvents);
 router.delete("/events/:id", verifyToken, deleteEvent);
 router.post("/rsvp", verifyToken, rsvpEvent); // RSVP to an event
 router.get("/participant-events", verifyToken, getParticipantsEvents); // Get events for participants
 router.get("/upcoming-events", verifyToken, getUpcomingEvents); // Get upcoming events
+router.get("/events/:id", verifyToken, getEventDetails);
 
 export default router;
